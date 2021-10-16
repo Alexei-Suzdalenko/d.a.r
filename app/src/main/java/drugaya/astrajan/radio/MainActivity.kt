@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        if(player != null){
+        if(player != null){ if(player!!.isPlaying){ start.visibility = View.GONE; stop.visibility = View.VISIBLE }
             if(player!!.isPlaying){ start.visibility = View.GONE; stop.visibility = View.VISIBLE }
             if(player!!.isPlaying){ start.visibility = View.GONE; stop.visibility = View.VISIBLE }
         }
