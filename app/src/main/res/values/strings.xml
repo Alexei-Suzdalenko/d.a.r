@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Другая Астрахань</string>
+    <string name="title_activity_index_pages">DrugayaAstrajanRadio</string>
+    <string name="title_home">Главная</string>
+    <string name="title_dashboard">Радио станции</string>
+    <string name="title_notifications">Экстра</string>
 </resources>
