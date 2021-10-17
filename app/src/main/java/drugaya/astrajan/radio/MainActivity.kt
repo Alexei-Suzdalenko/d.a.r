@@ -12,10 +12,13 @@ class MainActivity : AppCompatActivity() { // // video_view.player = player
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
     }
 
     override fun onStart() {
         super.onStart()
      //   if(player != null){ if( player!!.isPlaying ){ start.visibility = View.GONE; stop.visibility = View.VISIBLE; } }
     }
+
 }

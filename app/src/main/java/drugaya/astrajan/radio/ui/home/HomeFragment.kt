@@ -30,7 +30,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.stop.setOnClickListener {
-            requireActivity().applicationContext.stopService(Intent(requireActivity().applicationContext, ServiceRadio::class.java))
+            requireActivity().applicationContext.stopService(Intent( requireActivity().applicationContext, ServiceRadio::class.java ))
             App.stopRadio(); binding.start.visibility = View.VISIBLE; binding.stop.visibility = View.GONE
             if (mInterstitialAd != null) { mInterstitialAd?.show( requireActivity() ); chargeAdds() }
         }

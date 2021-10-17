@@ -11,6 +11,7 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import drugaya.astrajan.radio.MainActivity
 import drugaya.astrajan.radio.R
+import drugaya.astrajan.radio.assets.GetListRadioStations
 
 class App: Application() {
     companion object{
@@ -30,6 +31,8 @@ class App: Application() {
         }
         lateinit var sharedPreferences: SharedPreferences
         lateinit var editor: SharedPreferences.Editor
+        var listNamesStations = mutableListOf<String>()
+        val listUrlStations = mutableListOf<String>()
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -53,5 +56,7 @@ class App: Application() {
         editor = sharedPreferences.edit()
         val radioName = sharedPreferences.getString("radio", "none").toString()
         if (radioName == "none"){ editor.putString("radio", "Другая Астрахань"); editor.apply() }
+
+        GetListRadioStations.requestData()
     }
 }
