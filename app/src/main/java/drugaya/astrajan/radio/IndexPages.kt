@@ -29,7 +29,7 @@ class IndexPages : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        // navController.navigate(R.id.navigation_notifications)
+        navController.navigate( R.id.navigation_dashboard )
         // git@github.com:Alexei-Suzdalenko/d.a.r.git
         // git@github.com:Alexei-Suzdalenko/d.a.r.git
     }
