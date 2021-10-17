@@ -1,7 +1,9 @@
 package drugaya.astrajan.radio.rossiya_app.util
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
@@ -26,8 +28,11 @@ class App: Application() {
                 if(player!!.isPlaying){ player!!.stop() }
             }
         }
+        lateinit var sharedPreferences: SharedPreferences
+        lateinit var editor: SharedPreferences.Editor
     }
 
+    @SuppressLint("CommitPrefEdits")
     override fun onCreate(){
         super.onCreate()
         player = SimpleExoPlayer.Builder(this ).build()
@@ -43,5 +48,10 @@ class App: Application() {
             .setSmallIcon( R.drawable.play_icon )
             .setContentIntent( PendingIntent.getActivity(this, 11, Intent(this, MainActivity::class.java), 0) )
             .build()
+
+        sharedPreferences = getSharedPreferences("drugaya-astarjan", Context.MODE_PRIVATE)
+        editor = sharedPreferences.edit()
+        val radioName = sharedPreferences.getString("radio", "none").toString()
+        if (radioName == "none"){ editor.putString("radio", "Другая Астрахань"); editor.apply() }
     }
 }

@@ -1,6 +1,10 @@
 package drugaya.astrajan.radio
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
+import android.view.Window
+import android.view.WindowInsets
+import android.view.WindowManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -12,8 +16,11 @@ class IndexPages : AppCompatActivity() {
     private lateinit var binding: IndexPagesBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
+        super.onCreate(savedInstanceState); //
+        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else { window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) }
+        supportActionBar?.hide()
         binding = IndexPagesBinding.inflate(layoutInflater)
         setContentView( binding.root )
         val navView: BottomNavigationView = binding.navView
@@ -22,7 +29,8 @@ class IndexPages : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-
         // navController.navigate(R.id.navigation_notifications)
+        // git@github.com:Alexei-Suzdalenko/d.a.r.git
+        // git@github.com:Alexei-Suzdalenko/d.a.r.git
     }
 }

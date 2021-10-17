@@ -5,8 +5,15 @@
       <map>
         <entry key="..\:/OJO_ANDROID_NEW_ACCOUNT/drugaya.astrajan.radio-main/drugaya.astrajan.radio-main/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.16041666666666668" />
         <entry key="..\:/OJO_ANDROID_NEW_ACCOUNT/drugaya.astrajan.radio-main/drugaya.astrajan.radio-main/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.28717948717948716" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/drawable-v24/play_icon.xml" value="0.3138888888888889" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/drawable-v24/stop_icon.xml" value="0.3138888888888889" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/drawable/__stop.xml" value="0.3138888888888889" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/drawable/play_icon.xml" value="0.3138888888888889" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/drawable/stop_icon.xml" value="0.3138888888888889" />
         <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/layout/activity_main.xml" value="0.33402813965607087" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/layout/fragment_dashboard.xml" value="0.2477355072463768" />
         <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/layout/fragment_notifications.xml" value="0.2477355072463768" />
         <entry key="..\:/__ANDROID_WORK_SUZDALENKO_ALEXEI/d.a.r-main/app/src/main/res/layout/index_pages.xml" value="0.16236068895643363" />
       </map>
     </option>

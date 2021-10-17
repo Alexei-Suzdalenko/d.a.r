@@ -27,6 +27,7 @@
         <activity android:name=".MainActivity" android:exported="true" />
 
         <service android:name=".rossiya_app.util.ServiceRadio" android:foregroundServiceType="location" />
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-7286158310312043~4951140513" />
     </application>
 
 </manifest>
