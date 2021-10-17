@@ -42,13 +42,11 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() { super.onDestroyView(); _binding = null; }
+    override fun onDestroyView () { super.onDestroyView(); _binding = null }
 
     private fun chargeAdds() {
-        InterstitialAd.load( requireActivity().applicationContext, "ca-app-pub-7286158310312043/2557923222", adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }
-        })
-    }
+            InterstitialAd.load( requireActivity().applicationContext, "ca-app-pub-7286158310312043/2557923222", adRequest, object : InterstitialAdLoadCallback() {
+            override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }})}
 }
 
 /*
