@@ -1,5 +1,4 @@
 package drugaya.astrajan.radio
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
@@ -13,12 +12,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import drugaya.astrajan.radio.databinding.IndexPagesBinding
+import drugaya.astrajan.radio.rossiya_app.util.App.Companion.navController
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: IndexPagesBinding
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState); //
+        super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { window.insetsController?.hide(WindowInsets.Type.statusBars())
         } else { window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN) }
@@ -33,7 +32,5 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun goHomeFragent(){
-        navController.navigate( R.id.navigation_dashboard )
-    }
+    fun goHomeFragent(){ navController.navigate( R.id.navigation_home ) }
 }

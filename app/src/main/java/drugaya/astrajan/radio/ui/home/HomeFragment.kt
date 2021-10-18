@@ -4,14 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.ListFragment
+import com.google.android.exoplayer2.Player
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import drugaya.astrajan.radio.R
 import drugaya.astrajan.radio.databinding.FragmentHomeBinding
 import drugaya.astrajan.radio.rossiya_app.util.App
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.player
+import drugaya.astrajan.radio.rossiya_app.util.App.Companion.startImageView
+import drugaya.astrajan.radio.rossiya_app.util.App.Companion.stopImageView
 import drugaya.astrajan.radio.rossiya_app.util.ServiceRadio
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -24,20 +30,41 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.start.setOnClickListener {
-            ContextCompat.startForegroundService(requireActivity().applicationContext, Intent(requireActivity().applicationContext, ServiceRadio::class.java))
-            binding.start.visibility = View.GONE; binding.stop.visibility = View.VISIBLE
-        }
+        startImageView = binding.start
+        stopImageView = binding.stop
 
-        binding.stop.setOnClickListener {
+        startImageView!!.setOnClickListener {
+            ContextCompat.startForegroundService(requireActivity().applicationContext, Intent(requireActivity().applicationContext, ServiceRadio::class.java))
+            startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
+        }
+        stopImageView!!.setOnClickListener {
             requireActivity().applicationContext.stopService(Intent( requireActivity().applicationContext, ServiceRadio::class.java ))
-            App.stopRadio(); binding.start.visibility = View.VISIBLE; binding.stop.visibility = View.GONE
+            App.stopRadio(); startImageView!!.visibility = View.VISIBLE; stopImageView!!.visibility = View.GONE
             if (mInterstitialAd != null) { mInterstitialAd?.show( requireActivity() ); chargeAdds() }
         }
 
         binding.textHome.text = App.sharedPreferences.getString("stationName", "Другая Астрахань").toString()
 
-        if(player != null){ if( player!!.isPlaying ) { binding.start.visibility = View.GONE; binding.stop.visibility = View.VISIBLE  } }
+        if(player != null){
+            player!!.addListener(object : Player.Listener { // player listener
+                override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                    when (playbackState) {
+                        Player.STATE_READY -> {
+                            startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
+                            Toast.makeText(requireActivity().applicationContext, "ПОЕХАЛИ", Toast.LENGTH_SHORT).show()  }
+                        Player.STATE_ENDED -> { Toast.makeText(requireActivity().applicationContext, "ЗАВЕРШЕНО", Toast.LENGTH_SHORT).show() }
+                        Player.STATE_BUFFERING ->{
+                            startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
+                            Toast.makeText(requireActivity().applicationContext, "БУФЕРИЗАЦИЯ", Toast.LENGTH_SHORT).show()  }
+                        Player.STATE_IDLE -> {
+                            startImageView!!.visibility = View.VISIBLE; stopImageView!!.visibility = View.GONE
+                            Toast.makeText(requireActivity().applicationContext, "СТОП", Toast.LENGTH_SHORT).show() }
+                    }
+                }
+            })
+        }
+
+
         return root
     }
 
@@ -47,6 +74,10 @@ class HomeFragment : Fragment() {
     private fun chargeAdds() {
             InterstitialAd.load( requireActivity().applicationContext, "ca-app-pub-7286158310312043/2557923222", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }})}
+
+    private fun showStopButton(){
+        binding.start.visibility = View.GONE; binding.stop.visibility = View.VISIBLE
+    }
 }
 
 

@@ -5,7 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.navigation.NavController
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import drugaya.astrajan.radio.MainActivity
@@ -14,12 +17,18 @@ import drugaya.astrajan.radio.assets.GetListRadioStations
 
 class App: Application() {
     companion object{
+        @SuppressLint("StaticFieldLeak")
+        lateinit var navController: NavController
+        @SuppressLint("StaticFieldLeak")
+        var startImageView: ImageView? = null
+        @SuppressLint("StaticFieldLeak")
+        var stopImageView: ImageView? = null
         lateinit var notification: Notification
         var player: SimpleExoPlayer? = null
 
         fun playExoplayer(context: Context){
-            val playUrl = sharedPreferences.getString("stationName", "http://89.179.72.53:8070/live").toString()
-            player!!.setMediaItem(MediaItem.fromUri(playUrl))
+            val playUrl = sharedPreferences.getString("playUrl", "http://89.179.72.53:8070/live").toString()
+            player!!.setMediaItem(MediaItem.fromUri( playUrl ))
             player!!.prepare()
             player!!.play()
         }

@@ -15,7 +15,6 @@ import drugaya.astrajan.radio.databinding.FragmentListBinding
 import drugaya.astrajan.radio.rossiya_app.util.App
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.editor
 import drugaya.astrajan.radio.rossiya_app.util.ServiceRadio
-
 class ListFragment : Fragment() {
     private lateinit var dashboardViewModel: DashboardViewModel
     private var _binding: FragmentListBinding? = null
@@ -28,12 +27,13 @@ class ListFragment : Fragment() {
         _binding = FragmentListBinding.inflate(inflater, container, false)
         val root: View = binding.root
         val listView: ListView = binding.listView
+
         listView.adapter = RadioStationAdapter(requireActivity().applicationContext)
         listView.setOnItemClickListener { _, _, position, _ ->
             editor.putString("stationName", App.listNamesStations[position])
             editor.putString("playUrl", App.listUrlStations[position])
             editor.apply()
-            ContextCompat.startForegroundService(requireActivity().applicationContext, Intent(requireActivity().applicationContext, ServiceRadio::class.java))
+            ContextCompat.startForegroundService( requireActivity().applicationContext, Intent(requireActivity().applicationContext, ServiceRadio::class.java ))
             MainActivity().goHomeFragent()
         }
 
