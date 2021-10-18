@@ -1,4 +1,4 @@
-package drugaya.astrajan.radio.ui.notifications
+package drugaya.astrajan.radio.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="drugaya.astrajan.radio.ui.dashboard.DashboardFragment"
+        android:name="drugaya.astrajan.radio.ui.list_radio_stations.ListFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_list" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="drugaya.astrajan.radio.ui.notifications.NotificationsFragment"
+        android:name="drugaya.astrajan.radio.ui.settings.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

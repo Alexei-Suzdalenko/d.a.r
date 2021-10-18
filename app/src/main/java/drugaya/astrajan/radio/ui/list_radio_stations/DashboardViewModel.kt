@@ -1,11 +1,7 @@
-package drugaya.astrajan.radio.ui.dashboard
-import android.util.Log
+package drugaya.astrajan.radio.ui.list_radio_stations
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import org.json.JSONArray
-import org.json.JSONObject
-import java.net.URL
 
 class DashboardViewModel : ViewModel() {
   //  thread {

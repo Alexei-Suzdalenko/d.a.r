@@ -4,7 +4,6 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.google.android.exoplayer2.MediaItem
@@ -19,7 +18,8 @@ class App: Application() {
         var player: SimpleExoPlayer? = null
 
         fun playExoplayer(context: Context){
-            player!!.setMediaItem(MediaItem.fromUri("http://89.179.72.53:8070/live"))
+            val playUrl = sharedPreferences.getString("stationName", "http://89.179.72.53:8070/live").toString()
+            player!!.setMediaItem(MediaItem.fromUri(playUrl))
             player!!.prepare()
             player!!.play()
         }

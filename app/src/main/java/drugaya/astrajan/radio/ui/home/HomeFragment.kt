@@ -35,9 +35,9 @@ class HomeFragment : Fragment() {
             if (mInterstitialAd != null) { mInterstitialAd?.show( requireActivity() ); chargeAdds() }
         }
 
-        binding.textHome.text = App.sharedPreferences.getString("radio", "Другая Астрахань").toString()
+        binding.textHome.text = App.sharedPreferences.getString("stationName", "Другая Астрахань").toString()
 
-        if(player != null){ if( player!!.isPlaying ) { binding.start.visibility = View.GONE; binding.stop.visibility = View.VISIBLE } }
+        if(player != null){ if( player!!.isPlaying ) { binding.start.visibility = View.GONE; binding.stop.visibility = View.VISIBLE  } }
         return root
     }
 
@@ -48,6 +48,38 @@ class HomeFragment : Fragment() {
             InterstitialAd.load( requireActivity().applicationContext, "ca-app-pub-7286158310312043/2557923222", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }})}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 Configurar el archivo app-ads.txt de tus aplicaciones
