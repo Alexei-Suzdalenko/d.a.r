@@ -46,7 +46,8 @@ class HomeFragment : Fragment() {
         binding.textHome.text = App.sharedPreferences.getString("stationName", "Другая Астрахань").toString()
 
         if(player != null){
-            player!!.addListener(object : Player.Listener { // player listener
+            if( player!!.isPlaying ){ startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE }
+            player!!.addListener(object : Player.Listener {
                 override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                     when (playbackState) {
                         Player.STATE_READY -> {
@@ -63,7 +64,6 @@ class HomeFragment : Fragment() {
                 }
             })
         }
-
 
         return root
     }
