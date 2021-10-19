@@ -49,18 +49,17 @@ class HomeFragment : Fragment() {
             if( player!!.isPlaying ){ startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE }
             player!!.addListener(object : Player.Listener {
                 override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-                    when (playbackState) {
-                        Player.STATE_READY -> {
-                            startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
-                            Toast.makeText(requireActivity().applicationContext, "ПОЕХАЛИ", Toast.LENGTH_SHORT).show()  }
-                        Player.STATE_ENDED -> { Toast.makeText(requireActivity().applicationContext, "ЗАВЕРШЕНО", Toast.LENGTH_SHORT).show() }
-                        Player.STATE_BUFFERING ->{
-                            startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
-                            Toast.makeText(requireActivity().applicationContext, "БУФЕРИЗАЦИЯ", Toast.LENGTH_SHORT).show()  }
-                        Player.STATE_IDLE -> {
-                            startImageView!!.visibility = View.VISIBLE; stopImageView!!.visibility = View.GONE
-                            Toast.makeText(requireActivity().applicationContext, "СТОП", Toast.LENGTH_SHORT).show() }
-                    }
+                    try{
+                         when (playbackState) {
+                             Player.STATE_READY -> { startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
+                                 Toast.makeText(requireActivity().applicationContext, "ПОЕХАЛИ", Toast.LENGTH_SHORT).show()  }
+                             Player.STATE_ENDED -> { Toast.makeText(requireActivity().applicationContext, "ЗАВЕРШЕНО", Toast.LENGTH_SHORT).show() }
+                             Player.STATE_BUFFERING ->{ startImageView!!.visibility = View.GONE; stopImageView!!.visibility = View.VISIBLE
+                                 Toast.makeText(requireActivity().applicationContext, "БУФЕРИЗАЦИЯ", Toast.LENGTH_SHORT).show()  }
+                             Player.STATE_IDLE -> { startImageView!!.visibility = View.VISIBLE; stopImageView!!.visibility = View.GONE
+                                 Toast.makeText(requireActivity().applicationContext, "СТОП", Toast.LENGTH_SHORT).show() }
+                         }
+                    } catch (e: Exception) {}
                 }
             })
         }
@@ -75,9 +74,6 @@ class HomeFragment : Fragment() {
             InterstitialAd.load( requireActivity().applicationContext, "ca-app-pub-7286158310312043/2557923222", adRequest, object : InterstitialAdLoadCallback() {
             override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }})}
 
-    private fun showStopButton(){
-        binding.start.visibility = View.GONE; binding.stop.visibility = View.VISIBLE
-    }
 }
 
 
