@@ -34,6 +34,12 @@ class App: Application() {
         var player: SimpleExoPlayer? = null
 
         fun playExoplayer(context: Context){
+            val radioName = sharedPreferences.getString("stationName", "Другая Астрахань").toString()
+            notification = NotificationCompat.Builder(context, "drugaya-astrajan-radio" )
+                .setContentTitle( radioName )
+                .setSmallIcon( R.drawable.play_icon )
+                .setContentIntent( PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), 0) )
+                .build()
             val playUrl = sharedPreferences.getString("playUrl", "http://89.179.72.53:8070/live").toString()
             player!!.setMediaItem(MediaItem.fromUri( playUrl ))
             player!!.prepare()
@@ -62,15 +68,9 @@ class App: Application() {
             manager?.createNotificationChannel(serChannel)
         }
 
-        notification = NotificationCompat.Builder(this, "drugaya-astrajan-radio" )
-            .setContentTitle( getString( R.string.app_name) )
-            .setSmallIcon( R.drawable.play_icon )
-            .setContentIntent( PendingIntent.getActivity(this, 11, Intent(this, MainActivity::class.java), 0) )
-            .build()
-
         sharedPreferences = getSharedPreferences("drugaya-astarjan", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
-        val radioName = sharedPreferences.getString("radio", "none").toString()
+        val radioName = sharedPreferences.getString("stationName", "none").toString()
         if (radioName == "none"){ editor.putString("radio", "Другая Астрахань"); editor.apply() }
 
         GetListRadioStations.requestData()
