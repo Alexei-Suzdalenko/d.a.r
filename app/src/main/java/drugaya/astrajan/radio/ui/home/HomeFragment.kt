@@ -32,9 +32,6 @@ class HomeFragment : Fragment() {
 
         startImageView = binding.start
         stopImageView = binding.stop
-        binding.mediaPlayer.setOnClickListener {   }
-
-
 
         startImageView!!.setOnClickListener {
             ContextCompat.startForegroundService(requireActivity().applicationContext, Intent(requireActivity().applicationContext, ServiceRadio::class.java))

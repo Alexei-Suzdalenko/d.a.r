@@ -1,4 +1,5 @@
 package drugaya.astrajan.radio
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
@@ -13,6 +14,13 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import drugaya.astrajan.radio.databinding.IndexPagesBinding
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.navController
+import android.media.RingtoneManager
+
+import android.media.Ringtone
+import android.net.Uri
+import android.os.PowerManager
+import android.provider.Settings
+import java.lang.Exception
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: IndexPagesBinding
 
@@ -29,6 +37,19 @@ class MainActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(setOf( R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
+        // desactivar optimizacion de la bateria
+        val powerManager = applicationContext.getSystemService(POWER_SERVICE) as PowerManager
+        val packageName = "drugaya.astrajan.radio"
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val i = Intent()
+            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) { i.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS; i.data = Uri.parse("package:$packageName");startActivity(i) }
+        }
+
+
+
+        // navController.navigate(R.id.navigation_notifications)
     }
 
     fun goHomeFragent(){ navController.navigate( R.id.navigation_home ) }

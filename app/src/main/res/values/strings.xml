@@ -5,5 +5,5 @@
     <string name="title_dashboard">Радио станции</string>
     <string name="title_notifications">Экстра</string>
     <string name="auto_off">Таймер выключения</string>
-    <string name="media_player">Медия Плеер</string>
+    <string name="minute">минут</string>
 </resources>
