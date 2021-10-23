@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Другая Астрахань</string>
+    <string name="app_name_description">радiо гражданскаго сопротивленiя ДРУГАЯ АСТРАХАНЬ</string>
     <string name="title_activity_index_pages">DrugayaAstrajanRadio</string>
     <string name="title_home">Главная</string>
     <string name="title_dashboard">Радио станции</string>
     <string name="title_notifications">Экстра</string>
     <string name="auto_off">Таймер выключения</string>
-    <string name="minute">минут</string>
+    <string name="minute">минут до отключения</string>
+    <string name="error_app">ERROR APP SENT MESSAGE ALEXEI SUZDALENKO</string>
 </resources>

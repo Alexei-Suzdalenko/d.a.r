@@ -1,6 +1,10 @@
 package drugaya.astrajan.radio.components.files
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import com.google.android.material.slider.RangeSlider
@@ -21,21 +25,20 @@ object AutoOffFunction {
                 val valueRangeSlider = rangeSlider.values[0]
                 autoOffTextview.text = valueRangeSlider.toString()
                 val minInt = valueRangeSlider.toInt()
-                Toast.makeText( context, minInt.toString(), Toast.LENGTH_SHORT).show()
+                Toast.makeText( context, minInt.toString() + " " + context.getString(R.string.minute), Toast.LENGTH_SHORT).show()
                 autoOffTextview.text = " " + minInt.toString() + " " + context.getString(R.string.minute)
 
-                val alarm = OffRadioReceiver()
-                alarm.setAlarm(context)
 
-          //    val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-          //    val i = Intent(context, OffRadioReceiver::class.java)
-          //    val pi = PendingIntent.getBroadcast(context, 1, i, PendingIntent.FLAG_UPDATE_CURRENT)
-          //    if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
-          //        am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (1000 * 1 * 1).toLong(), pi)
-          //    } else {
-          //        am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (1000 * 1 * 1).toLong(), pi)
-          //    }
-//
+
+             val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+             val i = Intent(context, OffRadioReceiver::class.java)
+             val pi = PendingIntent.getBroadcast(context, 1, i, PendingIntent.FLAG_UPDATE_CURRENT)
+             if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){ // tiempo en minutos, minInt = 5
+                 am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60000 * minInt ).toLong(), pi)
+             } else { // tiempo en minutos
+                 am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60000 * minInt ).toLong(), pi)
+             }
+
                // off alarm
                // val intent = Intent(context, OffRadioReceiver::class.java)
                // val sender = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT)
@@ -44,9 +47,5 @@ object AutoOffFunction {
             }
         })
 
-        //      autoOffTextview.setOnClickListener {
-        //          Toast.makeText( context, "CLICK", Toast.LENGTH_SHORT).show()
-        //          autoOffTextview.text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        //      }
     }
 }

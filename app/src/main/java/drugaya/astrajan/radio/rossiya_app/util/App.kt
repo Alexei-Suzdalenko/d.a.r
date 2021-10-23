@@ -20,8 +20,6 @@ import android.media.AudioManager
 import android.media.AudioPlaybackCaptureConfiguration
 import android.net.Uri
 import android.os.PowerManager
-
-
 class App: Application() {
     companion object{
         @SuppressLint("StaticFieldLeak")

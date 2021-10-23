@@ -14,6 +14,9 @@ import android.media.RingtoneManager
 import android.net.Uri
 import androidx.core.app.JobIntentService.enqueueWork
 import androidx.legacy.content.WakefulBroadcastReceiver
+import drugaya.astrajan.radio.R
+import drugaya.astrajan.radio.rossiya_app.util.App
+import drugaya.astrajan.radio.rossiya_app.util.App.Companion.stopRadio
 import java.lang.Exception
 
 class OffRadioReceiver : BroadcastReceiver () {
@@ -23,33 +26,34 @@ class OffRadioReceiver : BroadcastReceiver () {
     @SuppressLint("InvalidWakeLockTag")
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        Toast.makeText(context, " !!!!!!!!!! !!!!!!!!!! start receiver !!!!!!!!!!", Toast.LENGTH_LONG).show() // For example
-
-        pm = context!!.getSystemService(Context.POWER_SERVICE) as PowerManager
-        wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "kio")
-        wl.acquire(2*60*1000L )
-
-        val wakeIntent = Intent()
-        wakeIntent.setClassName("drugaya.astrajan.radio", "drugaya.astrajan.radio.MainActivity")
-        wakeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        context.startActivity(wakeIntent)
-
+        Toast.makeText(context, "RADIO OFF", Toast.LENGTH_LONG).show()
 
         try {
+            pm = context!!.getSystemService(Context.POWER_SERVICE) as PowerManager
+            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "kio")
+            wl.acquire(2*60*1000L )
+            val wakeIntent = Intent()
+            wakeIntent.setClassName("drugaya.astrajan.radio", "drugaya.astrajan.radio.MainActivity")
+            wakeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(wakeIntent)
+
             val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val r = RingtoneManager.getRingtone(context, notification)
-            r.play()
-        } catch (e: Exception) { e.printStackTrace() }
+            r.play(); r.play(); r.play(); r.play()
 
+            wl.release()
+        } catch (e: Exception) { Toast.makeText(context, context!!.resources.getString(R.string.error_app), Toast.LENGTH_SHORT).show() }
 
-        Toast.makeText(context, "Alarm !!!!!!!!!!", Toast.LENGTH_LONG).show() // For example
-        wl.release()
+        // si la radio esta en funcionameto la apagamos
+        stopRadio()
+
     }
 
-    fun setAlarm(context: Context) {
-        val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val i = Intent(context, OffRadioReceiver::class.java)
-        val pi = PendingIntent.getBroadcast(context, 0, i, 0)
-        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), (1000 * 10 * 10).toLong(), pi) // Millisec * Second * Minute
-    }
+    // por ahora no se usa
+  // fun setAlarm(context: Context) {
+  //     val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+  //     val i = Intent(context, OffRadioReceiver::class.java)
+  //     val pi = PendingIntent.getBroadcast(context, 0, i, 0)
+  //     am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), (1000 * 10 * 10).toLong(), pi) // Millisec * Second * Minute
+  // }
 }
