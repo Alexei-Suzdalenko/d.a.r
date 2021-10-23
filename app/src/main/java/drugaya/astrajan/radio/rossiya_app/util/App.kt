@@ -20,6 +20,8 @@ import android.media.AudioManager
 import android.media.AudioPlaybackCaptureConfiguration
 import android.net.Uri
 import android.os.PowerManager
+import android.util.Log
+
 class App: Application() {
     companion object{
         @SuppressLint("StaticFieldLeak")
@@ -32,6 +34,7 @@ class App: Application() {
         var player: SimpleExoPlayer? = null
 
         fun playExoplayer(context: Context){
+            if( player == null) player = SimpleExoPlayer.Builder( context ).build()
             val radioName = sharedPreferences.getString("stationName", "Другая Астрахань").toString()
             notification = NotificationCompat.Builder(context, "drugaya-astrajan-radio" )
                 .setContentTitle( radioName )
@@ -45,10 +48,12 @@ class App: Application() {
         }
 
         fun stopRadio(){
-            if( player != null ){
-                if(player!!.isPlaying){ player!!.stop() }
-            }
+            if( player != null ) { if (player!!.isPlaying) { player!!.stop() } }
+            try { player?.stop() } catch (e: Exception){}
+            try { player?.release() } catch (e: Exception){}
+            player = null
         }
+
         lateinit var sharedPreferences: SharedPreferences
         lateinit var editor: SharedPreferences.Editor
         var listNamesStations = mutableListOf<String>()
@@ -58,7 +63,6 @@ class App: Application() {
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(){
         super.onCreate()
-        player = SimpleExoPlayer.Builder(this ).build()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serChannel = NotificationChannel("drugaya-astrajan-radio", "name", NotificationManager.IMPORTANCE_LOW)

@@ -12,6 +12,7 @@ import drugaya.astrajan.radio.R
 import kotlinx.android.synthetic.main.fragment_notifications.view.*
 
 import drugaya.astrajan.radio.assets.OffRadioReceiver
+import drugaya.astrajan.radio.rossiya_app.util.App
 
 
 object AutoOffFunction {
@@ -22,6 +23,7 @@ object AutoOffFunction {
         rangeSlider.addOnSliderTouchListener(object : RangeSlider.OnSliderTouchListener{ override fun onStopTrackingTouch(slider: RangeSlider) {}
             @SuppressLint("SetTextI18n", "UnspecifiedImmutableFlag")
             override fun onStartTrackingTouch(slider: RangeSlider) {
+                // recojmos valor de slider y enseñamos
                 val valueRangeSlider = rangeSlider.values[0]
                 autoOffTextview.text = valueRangeSlider.toString()
                 val minInt = valueRangeSlider.toInt()
@@ -29,10 +31,11 @@ object AutoOffFunction {
                 autoOffTextview.text = " " + minInt.toString() + " " + context.getString(R.string.minute)
 
 
-
+             // instalamos alarma con el valor de el slider
              val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
              val i = Intent(context, OffRadioReceiver::class.java)
              val pi = PendingIntent.getBroadcast(context, 1, i, PendingIntent.FLAG_UPDATE_CURRENT)
+
              if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){ // tiempo en minutos, minInt = 5
                  am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60000 * minInt ).toLong(), pi)
              } else { // tiempo en minutos

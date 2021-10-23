@@ -12,11 +12,14 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.media.RingtoneManager
 import android.net.Uri
+import android.util.Log
 import androidx.core.app.JobIntentService.enqueueWork
+import androidx.core.content.ContextCompat
 import androidx.legacy.content.WakefulBroadcastReceiver
 import drugaya.astrajan.radio.R
 import drugaya.astrajan.radio.rossiya_app.util.App
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.stopRadio
+import drugaya.astrajan.radio.rossiya_app.util.ServiceRadio
 import java.lang.Exception
 
 class OffRadioReceiver : BroadcastReceiver () {
@@ -28,25 +31,25 @@ class OffRadioReceiver : BroadcastReceiver () {
 
         Toast.makeText(context, "RADIO OFF", Toast.LENGTH_LONG).show()
 
-        try {
-            pm = context!!.getSystemService(Context.POWER_SERVICE) as PowerManager
-            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "kio")
-            wl.acquire(2*60*1000L )
-            val wakeIntent = Intent()
-            wakeIntent.setClassName("drugaya.astrajan.radio", "drugaya.astrajan.radio.MainActivity")
-            wakeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            context.startActivity(wakeIntent)
+       try {
+           pm = context!!.getSystemService(Context.POWER_SERVICE) as PowerManager
+           wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "kio")
+           wl.acquire(2*60*1000L )
+           val wakeIntent = Intent()
+           wakeIntent.setClassName("drugaya.astrajan.radio", "drugaya.astrajan.radio.MainActivity")
+           wakeIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+           context.startActivity(wakeIntent)
 
-            val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val r = RingtoneManager.getRingtone(context, notification)
-            r.play(); r.play(); r.play(); r.play()
+           val notification: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+           val r = RingtoneManager.getRingtone(context, notification)
+           r.play()
 
-            wl.release()
-        } catch (e: Exception) { Toast.makeText(context, context!!.resources.getString(R.string.error_app), Toast.LENGTH_SHORT).show() }
+           wl.release()
+       } catch (e: Exception) { Toast.makeText(context, context!!.resources.getString(R.string.error_app), Toast.LENGTH_SHORT).show() }
+
 
         // si la radio esta en funcionameto la apagamos
-        stopRadio()
-
+         context!!.stopService( Intent( context, ServiceRadio::class.java ))
     }
 
     // por ahora no se usa

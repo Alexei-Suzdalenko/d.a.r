@@ -39,7 +39,8 @@ class HomeFragment : Fragment() {
         }
         stopImageView!!.setOnClickListener {
             requireActivity().applicationContext.stopService(Intent( requireActivity().applicationContext, ServiceRadio::class.java ))
-            App.stopRadio(); startImageView!!.visibility = View.VISIBLE; stopImageView!!.visibility = View.GONE
+            //  App.stopRadio();
+            startImageView!!.visibility = View.VISIBLE; stopImageView!!.visibility = View.GONE
             if (mInterstitialAd != null) { mInterstitialAd?.show( requireActivity() ); chargeAdds() }
         }
 

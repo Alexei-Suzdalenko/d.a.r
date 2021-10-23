@@ -36,7 +36,7 @@
                         android:text="@string/auto_off" />
                     <com.google.android.material.slider.RangeSlider
                         android:id="@+id/range_slider"
-                        android:valueFrom="5"
+                        android:valueFrom="1"
                         android:valueTo="180"
                         android:layout_margin="2dp"
                         android:layout_width="match_parent"

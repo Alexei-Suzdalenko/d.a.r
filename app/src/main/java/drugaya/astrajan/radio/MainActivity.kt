@@ -20,6 +20,7 @@ import android.media.Ringtone
 import android.net.Uri
 import android.os.PowerManager
 import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
 import java.lang.Exception
 class MainActivity : AppCompatActivity() {
