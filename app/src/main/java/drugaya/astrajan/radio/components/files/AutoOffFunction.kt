@@ -33,7 +33,7 @@ object AutoOffFunction {
 
              // instalamos alarma con el valor de el slider
              val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-             val i = Intent(context, OffRadioReceiver::class.java)
+             val i = Intent(context, OffRadioReceiver::class.java); i.putExtra("info", "off_radio")
              val pi = PendingIntent.getBroadcast(context, 1, i, PendingIntent.FLAG_UPDATE_CURRENT)
 
              if(Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){ // tiempo en minutos, minInt = 5

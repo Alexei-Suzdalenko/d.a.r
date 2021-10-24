@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/start"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:layout_marginBottom="160dp"
         android:contentDescription="@string/app_name"
         android:src="@drawable/__play"
@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/stop"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
         android:visibility="gone"
         android:src="@drawable/__stop"
         android:layout_marginBottom="160dp"

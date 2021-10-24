@@ -48,8 +48,10 @@ class OffRadioReceiver : BroadcastReceiver () {
        } catch (e: Exception) { Toast.makeText(context, context!!.resources.getString(R.string.error_app), Toast.LENGTH_SHORT).show() }
 
 
-        // si la radio esta en funcionameto la apagamos
-         context!!.stopService( Intent( context, ServiceRadio::class.java ))
+        // si la radio esta en funcionameto  intent info es "off_radio" la apagamos
+        if (intent?.getStringExtra("info") == "off_radio"){ context!!.stopService( Intent( context, ServiceRadio::class.java )) }
+
+        
     }
 
     // por ahora no se usa
