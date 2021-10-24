@@ -28,9 +28,6 @@ class OffRadioReceiver : BroadcastReceiver () {
 
     @SuppressLint("InvalidWakeLockTag")
     override fun onReceive(context: Context?, intent: Intent?) {
-
-        Toast.makeText(context, "RADIO OFF", Toast.LENGTH_LONG).show()
-
        try {
            pm = context!!.getSystemService(Context.POWER_SERVICE) as PowerManager
            wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "kio")
@@ -49,8 +46,13 @@ class OffRadioReceiver : BroadcastReceiver () {
 
 
         // si la radio esta en funcionameto  intent info es "off_radio" la apagamos
-        if (intent?.getStringExtra("info") == "off_radio"){ context!!.stopService( Intent( context, ServiceRadio::class.java )) }
+        if (intent?.getStringExtra("info") == "off_radio"){
+            Toast.makeText(context, "RADIO OFF", Toast.LENGTH_LONG).show(); context!!.stopService( Intent( context, ServiceRadio::class.java ))
+        }
 
+        if( intent?.getStringExtra("set_alarm") == "set_alarm"){
+            Toast.makeText(context, "START RADIO", Toast.LENGTH_LONG).show(); ContextCompat.startForegroundService( context!!, Intent( context, ServiceRadio::class.java ))
+        }
         
     }
 

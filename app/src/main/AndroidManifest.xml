@@ -41,7 +41,7 @@
             </intent-filter>
         </receiver>
         <service
-            android:name="drugaya.astrajan.radio.components.files.dont_use_file.YourService"
+            android:name="drugaya.astrajan.radio.assets.WaitAlarmService"
             android:enabled="true"
             android:process=":your_service" />
     </application>
