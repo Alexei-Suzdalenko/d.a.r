@@ -9,4 +9,5 @@
     <string name="minute">минут до отключения</string>
     <string name="error_app">ERROR APP SENT MESSAGE ALEXEI SUZDALENKO</string>
     <string name="set_alarm">Будильник</string>
+    <string name="off">Off</string>
 </resources>
