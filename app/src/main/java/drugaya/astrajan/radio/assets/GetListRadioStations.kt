@@ -10,21 +10,21 @@ import java.util.*
 
 object GetListRadioStations {
     fun requestData(){
-        var url = "https://alexei-suzdalenko.github.io/rus-radio/es.js"
+        var url = "https://alexei-suzdalenko.github.io/r-radio/es.js"
         val currentSettedLanguage = sharedPreferences.getString("language", "none").toString()
 
         if( currentSettedLanguage == "es"){
-            url = "https://alexei-suzdalenko.github.io/rus-radio/es.js"
+            url = "https://alexei-suzdalenko.github.io/r-radio/es.js"
         }
 
         if( currentSettedLanguage == "ru"){
-            url = "https://alexei-suzdalenko.github.io/rus-radio/rus-radio.js"
+            url = "https://alexei-suzdalenko.github.io/r-radio/rus-radio.js"
         }
 
         if( currentSettedLanguage == "none"){
             var lang = ""
             try{ lang = Locale.getDefault().displayLanguage } catch (e: Exception){}
-            if(lang.contains("рус")){ url = "https://alexei-suzdalenko.github.io/rus-radio/rus-radio.js" }
+            if(lang.contains("рус")){ url = "https://alexei-suzdalenko.github.io/r-radio/rus-radio.js" }
         }
 
         Thread {
