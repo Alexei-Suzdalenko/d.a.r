@@ -1,4 +1,5 @@
 package drugaya.astrajan.radio
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Build
@@ -28,6 +29,7 @@ import java.lang.Exception
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: IndexPagesBinding
 
+    @SuppressLint("BatteryLife")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -42,11 +44,19 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-       App.editor.putLong("alarm_time", (1000).toLong())
-       App.editor.apply()
+    //   App.editor.putLong("alarm_time", (1000).toLong())
+    //   App.editor.apply()
 
         // desactivar optimizacion de la bateria
-      try{
+        try{
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+            val pkg = packageName
+            val pm = getSystemService(PowerManager::class.java)
+            if (!pm.isIgnoringBatteryOptimizations(pkg)) {
+                val i = Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS).setData(Uri.parse("package:$pkg"))
+                startActivity(i)
+            }
+        }
           val powerManager = applicationContext.getSystemService(POWER_SERVICE) as PowerManager
           val packageName = "drugaya.astrajan.radio"
           if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -68,3 +78,6 @@ class MainActivity : AppCompatActivity() {
     }
     fun goToListRadiosStations(){ navController.navigate( R.id.navigation_dashboard ) }
 }
+
+
+// https://pasportnyy-stol.com/guvm-mvd-v-astrahanskoy-oblasti-adresa-podrazdeleniy/
