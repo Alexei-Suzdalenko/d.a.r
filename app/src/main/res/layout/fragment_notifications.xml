@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.settings.NotificationsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="50dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple_500"
+                        android:textSize="19sp"
+                        android:layout_margin="9dp"
+                        android:text="@string/auto_off" />
+                    <com.google.android.material.slider.RangeSlider
+                        android:id="@+id/range_slider"
+                        android:valueFrom="1"
+                        android:valueTo="180"
+                        android:layout_margin="9dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/auto_off_textview"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/app_name"
+                        android:textSize="18sp"
+                        android:textColor="@color/purple_500"
+                        android:layout_margin="9dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="44dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textColor="@color/purple_500"
+                        android:textSize="19sp"
+                        android:layout_margin="9dp"
+                        android:text="@string/set_alarm" />
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_marginTop="22dp"
+                        android:layout_marginBottom="22dp"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <NumberPicker
+                            android:id="@+id/numberPicker_hours"
+                            android:theme="@style/AppTheme.Picker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:text="@string/separator"
+                            android:textSize="31sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <NumberPicker
+                            android:id="@+id/numberPicker_minute"
+                            android:theme="@style/AppTheme.Picker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <Button
+                        android:id="@+id/set_alarm_button"
+                        android:layout_gravity="center"
+                        android:textAllCaps="false"
+                        android:layout_margin="9dp"
+                        android:text="@string/set_alarm_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/time_clock"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/app_name"
+                        android:textSize="18sp"
+                        android:textColor="@color/purple_500"
+                        android:layout_margin="9dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/alarm_swith"
+                        android:textColor="@color/purple_500"
+                        android:layout_marginStart="44dp"
+                        android:text="@string/off"
+                        android:layout_margin="9dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="44dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="111dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/comment"
+                        android:text="@string/comment"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textSize="17sp"
+                        android:textColor="@color/purple_500"
+                        android:layout_margin="22dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/es_textview"
+                        android:text="Es"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textSize="17sp"
+                        android:textColor="@color/purple_500"
+                        android:layout_margin="22dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/ru_textview"
+                        android:text="Ru"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:textSize="17sp"
+                        android:textColor="@color/purple_500"
+                        android:layout_margin="22dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
