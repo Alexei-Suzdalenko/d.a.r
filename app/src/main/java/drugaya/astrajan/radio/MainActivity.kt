@@ -1,4 +1,5 @@
 package drugaya.astrajan.radio
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -42,14 +43,14 @@ class MainActivity : AppCompatActivity() {
 
 
         // desactivar optimizacion de la bateria
-        try{
-            val powerManager = applicationContext.getSystemService(POWER_SERVICE) as PowerManager
-            val packageName = "drugaya.astrajan.radio"
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                val i = Intent()
-                if (!powerManager.isIgnoringBatteryOptimizations(packageName)) { i.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS; i.data = Uri.parse("package:$packageName");startActivity(i) }
-            }
-        } catch (e: Exception){ Toast.makeText(this, resources.getString(R.string.error_app), Toast.LENGTH_SHORT).show() }
+      try{
+          val powerManager = applicationContext.getSystemService(POWER_SERVICE) as PowerManager
+          val packageName = "drugaya.astrajan.radio"
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+              val i = Intent()
+              if (!powerManager.isIgnoringBatteryOptimizations(packageName)) { i.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS; i.data = Uri.parse("package:$packageName");startActivity(i) }
+          }
+      } catch (e: Exception){ Toast.makeText(this, resources.getString(R.string.error_app), Toast.LENGTH_SHORT).show() }
 
 
 
@@ -57,4 +58,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goHomeFragent(){ navController.navigate( R.id.navigation_home ) }
+    fun commentThisApp(context: Context){
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=drugaya.astrajan.radio"))
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        context.startActivity(intent)
+    }
+    fun goToListRadiosStations(){ navController.navigate( R.id.navigation_dashboard ) }
 }

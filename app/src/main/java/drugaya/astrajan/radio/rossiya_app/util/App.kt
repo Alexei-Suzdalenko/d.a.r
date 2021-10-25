@@ -31,6 +31,7 @@ class App: Application() {
         @SuppressLint("StaticFieldLeak")
         var stopImageView: ImageView? = null
         lateinit var notification: Notification
+        lateinit var notificationAlarm: Notification
         var player: SimpleExoPlayer? = null
 
         fun playExoplayer(context: Context){
@@ -58,17 +59,31 @@ class App: Application() {
         lateinit var editor: SharedPreferences.Editor
         var listNamesStations = mutableListOf<String>()
         val listUrlStations = mutableListOf<String>()
+
+      fun setNotificationAlarm(context: Context){
+          val alarmInfo = sharedPreferences.getString("current_alarm", "").toString()
+          val radioName = sharedPreferences.getString("stationName", "").toString()
+          notificationAlarm = NotificationCompat.Builder(context, "notificationAlarm" )
+              .setContentTitle("$radioName $alarmInfo")
+              .setSmallIcon( R.drawable.alert_icon )
+              .setContentIntent( PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), 0) )
+              .build()
+      }
     }
 
     @SuppressLint("CommitPrefEdits")
     override fun onCreate(){
         super.onCreate()
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val serChannel = NotificationChannel("drugaya-astrajan-radio", "name", NotificationManager.IMPORTANCE_LOW)
             val manager = getSystemService(NotificationManager::class.java)
             manager?.createNotificationChannel(serChannel)
         }
+       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+           val serChannel2 = NotificationChannel("notificationAlarm", "name2", NotificationManager.IMPORTANCE_LOW)
+           val manager = getSystemService(NotificationManager::class.java)
+           manager?.createNotificationChannel(serChannel2)
+       }
 
         sharedPreferences = getSharedPreferences("drugaya-astarjan", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()

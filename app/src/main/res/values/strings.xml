@@ -10,4 +10,8 @@
     <string name="error_app">ERROR APP SENT MESSAGE ALEXEI SUZDALENKO</string>
     <string name="set_alarm">Будильник</string>
     <string name="off">Off</string>
+    <string name="comment">Оставить комментарий, пожелание</string>
+    <string name="separator">:</string>
+    <string name="set_alarm_button">Установить</string>
+    <string name="share">Поделиться</string>
 </resources>

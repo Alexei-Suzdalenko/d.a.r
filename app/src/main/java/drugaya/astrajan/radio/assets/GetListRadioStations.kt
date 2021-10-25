@@ -1,15 +1,38 @@
 package drugaya.astrajan.radio.assets
+import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.listNamesStations
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.listUrlStations
+import drugaya.astrajan.radio.rossiya_app.util.App.Companion.sharedPreferences
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.URL
+import java.util.*
+
 object GetListRadioStations {
     fun requestData(){
+        var url = "https://alexei-suzdalenko.github.io/rus-radio/es.js"
+        val currentSettedLanguage = sharedPreferences.getString("language", "none").toString()
+
+        if( currentSettedLanguage == "es"){
+            url = "https://alexei-suzdalenko.github.io/rus-radio/es.js"
+        }
+
+        if( currentSettedLanguage == "ru"){
+            url = "https://alexei-suzdalenko.github.io/rus-radio/rus-radio.js"
+        }
+
+        if( currentSettedLanguage == "none"){
+            var lang = ""
+            try{ lang = Locale.getDefault().displayLanguage } catch (e: Exception){}
+            if(lang.contains("рус")){ url = "https://alexei-suzdalenko.github.io/rus-radio/rus-radio.js" }
+        }
+
         Thread {
             try {
-                val respose = URL("https://alexei-suzdalenko.github.io/rus-radio/rus-radio.js").readText()
+                val respose = URL(url).readText()
                 val jsonObject = JSONObject( respose )
 
                 val arrayNames: JSONArray = jsonObject.get("name") as JSONArray

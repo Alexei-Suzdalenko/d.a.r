@@ -56,11 +56,4 @@ class OffRadioReceiver : BroadcastReceiver () {
         
     }
 
-    // por ahora no se usa
-  // fun setAlarm(context: Context) {
-  //     val am = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-  //     val i = Intent(context, OffRadioReceiver::class.java)
-  //     val pi = PendingIntent.getBroadcast(context, 0, i, 0)
-  //     am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), (1000 * 10 * 10).toLong(), pi) // Millisec * Second * Minute
-  // }
 }

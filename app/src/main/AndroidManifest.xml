@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="drugaya.astrajan.radio">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="drugaya.astrajan.radio">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name=".rossiya_app.util.App"
         android:icon="@mipmap/ic_launcher"
@@ -30,7 +29,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".rossiya_app.util.ServiceRadio" android:foregroundServiceType="location" />
+        <service android:name=".rossiya_app.util.ServiceRadio" android:foregroundServiceType="location"  android:enabled="true" />
         <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-7286158310312043~4951140513" />
 
         <receiver android:name=".assets.OffRadioReceiver" android:process=":remote" />
@@ -40,10 +39,7 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <service
-            android:name="drugaya.astrajan.radio.assets.WaitAlarmService"
-            android:enabled="true"
-            android:process=":your_service" />
+        <service android:name="drugaya.astrajan.radio.rossiya_app.util.WaitAlarmService" android:enabled="true" android:foregroundServiceType="location" />
     </application>
 
 </manifest>

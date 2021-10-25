@@ -41,12 +41,6 @@ object AutoOffFunction {
              } else { // tiempo en minutos
                  am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (60000 * minInt ).toLong(), pi)
              }
-
-               // off alarm
-               // val intent = Intent(context, OffRadioReceiver::class.java)
-               // val sender = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT)
-               // val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-               // alarmManager.cancel(sender)
             }
         })
 
