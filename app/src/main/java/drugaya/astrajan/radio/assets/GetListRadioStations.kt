@@ -1,5 +1,8 @@
 package drugaya.astrajan.radio.assets
+import android.app.Activity
+import android.content.Context
 import android.util.Log
+import drugaya.astrajan.radio.MainActivity
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.listNamesStations
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.listUrlStations
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.sharedPreferences
@@ -9,7 +12,7 @@ import java.net.URL
 import java.util.*
 
 object GetListRadioStations {
-    fun requestData(){
+    fun requestData(activity: Activity? = null){
         var url = "https://alexei-suzdalenko.github.io/r-radio/es.js"
         val currentSettedLanguage = sharedPreferences.getString("language", "none").toString()
 
@@ -40,7 +43,7 @@ object GetListRadioStations {
                 listUrlStations.clear()
                 for (i in 0 until arrayNames.length()) { listUrlStations.add( arrayUrls.get(i).toString() ) }
 
-
+                activity?.runOnUiThread{ MainActivity().goToListRadiosStations() }
 
             } catch (e: Exception) { Log.w("tag", "ERROR MESSAGE " + e.message.toString()) }
         }.start()

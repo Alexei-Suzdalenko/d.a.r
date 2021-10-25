@@ -93,6 +93,7 @@ class SetAlarm (val view: View, val context: Context) {
         editor.putString("alarm", "enabled")
         editor.putInt( "alarm_hours", hours )
         editor.putInt( "alarm_minute", minute )
+        editor.putLong("alarm_time", milliseconds)
         editor.apply()
         // seteamos switcher en ON y encendido
         switchCompatAlarm.text = "On"

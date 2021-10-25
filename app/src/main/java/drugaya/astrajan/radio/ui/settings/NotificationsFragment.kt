@@ -22,7 +22,7 @@ class NotificationsFragment : Fragment() {
 
         setAutoOffFunctionality(root, requireActivity().applicationContext)
         SetAlarm( root , requireActivity().applicationContext ).setAlarmFunction()
-        AddButtonFunctionlity(requireActivity().applicationContext, root).setButtonBottomFunctionality()
+        AddButtonFunctionlity(requireActivity(), root).setButtonBottomFunctionality()
 
     //  val textView: TextView = binding.textNotifications
     //  notificationsViewModel.text.observe(viewLifecycleOwner, Observer {

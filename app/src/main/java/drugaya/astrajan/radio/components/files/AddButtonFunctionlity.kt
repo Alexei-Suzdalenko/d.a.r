@@ -1,4 +1,5 @@
 package drugaya.astrajan.radio.components.files
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -9,22 +10,20 @@ import drugaya.astrajan.radio.R
 import drugaya.astrajan.radio.assets.GetListRadioStations
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.editor
 import kotlinx.android.synthetic.main.fragment_notifications.view.*
-class AddButtonFunctionlity(val context: Context, val view: View) {
+class AddButtonFunctionlity(val activity: Activity, val view: View) {
 
     fun setButtonBottomFunctionality(){
 
-        view.comment.setOnClickListener { MainActivity().commentThisApp(context) }
+        view.comment.setOnClickListener { MainActivity().commentThisApp(activity) }
 
         view.es_textview.setOnClickListener {
             editor.putString("language", "es"); editor.apply()
-            GetListRadioStations.requestData()
-            MainActivity().goToListRadiosStations()
+            GetListRadioStations.requestData(activity)
         }
 
         view.ru_textview.setOnClickListener {
             editor.putString("language", "ru"); editor.apply()
-            GetListRadioStations.requestData()
-            MainActivity().goToListRadiosStations()
+            GetListRadioStations.requestData(activity)
         }
     }
 

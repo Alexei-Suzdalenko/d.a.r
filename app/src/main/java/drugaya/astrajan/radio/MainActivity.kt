@@ -23,6 +23,7 @@ import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import drugaya.astrajan.radio.rossiya_app.util.App
 import java.lang.Exception
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: IndexPagesBinding
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+       App.editor.putLong("alarm_time", (1000).toLong())
+       App.editor.apply()
 
         // desactivar optimizacion de la bateria
       try{
