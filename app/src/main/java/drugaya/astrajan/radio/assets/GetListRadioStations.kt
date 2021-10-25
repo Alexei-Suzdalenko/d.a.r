@@ -40,6 +40,8 @@ object GetListRadioStations {
                 listUrlStations.clear()
                 for (i in 0 until arrayNames.length()) { listUrlStations.add( arrayUrls.get(i).toString() ) }
 
+
+
             } catch (e: Exception) { Log.w("tag", "ERROR MESSAGE " + e.message.toString()) }
         }.start()
     }

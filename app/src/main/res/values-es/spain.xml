@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Radio Rock Dial Los 40</string>
+    <string name="app_name_description">Cadena Dial,Los 40 Principales,Cadena Cien,Rock Fm,Loca Fm,RAC 1,Ondacero,Ibiza,RNE,Cadena Ser,Ibiza Sonica,Vinilo,Cadena Cope,Hit,Kiss Fm,Gay Radio,Fresca Radio,Holiday Gim,Radiole"</string>
+    <string name="title_activity_index_pages">radio_rock_dial_los_40</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Emisoras radio</string>
+    <string name="title_notifications">Extra</string>
+    <string name="auto_off">Apagado</string>
+    <string name="minute">minutos</string>
+    <string name="error_app">ERROR APP SENT MESSAGE ALEXEI SUZDALENKO</string>
+    <string name="set_alarm">Alarma</string>
+    <string name="off">Off</string>
+    <string name="comment">Comentario</string>
+    <string name="separator">:</string>
+    <string name="set_alarm_button">Instalar</string>
+    <string name="share">Compartir</string>
+</resources>
