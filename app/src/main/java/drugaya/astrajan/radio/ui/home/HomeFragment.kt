@@ -73,7 +73,8 @@ class HomeFragment : Fragment() {
 
     private fun chargeAdds() {
             InterstitialAd.load( requireActivity().applicationContext, "ca-app-pub-7286158310312043/2557923222", adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }})}
+            override fun onAdLoaded(interstitialAd: InterstitialAd) { mInterstitialAd = interstitialAd }})
+    }
 
 }
 

@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+    // esto uso para hacer prueba de alarma ...
     //   App.editor.putLong("alarm_time", (1000).toLong())
     //   App.editor.apply()
 
