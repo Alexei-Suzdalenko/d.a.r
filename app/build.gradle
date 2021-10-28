@@ -4,8 +4,8 @@ android { compileSdk 30
         applicationId "drugaya.astrajan.radio"
         minSdk 21
         targetSdk 30
-        versionCode 4
-        versionName "1.0.4"
+        versionCode 5
+        versionName "1.0.5"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes { release { minifyEnabled false; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' } }
