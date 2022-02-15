@@ -14,6 +14,7 @@ import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.fragment_notifications.view.*
 import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
+import drugaya.astrajan.radio.MainActivity
 import drugaya.astrajan.radio.assets.OffRadioReceiver
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.editor
 import drugaya.astrajan.radio.rossiya_app.util.App.Companion.sharedPreferences
@@ -56,9 +57,14 @@ class SetAlarm (val view: View, val context: Context) {
               editor.putString("alarm", "disabled"); editor.apply(); Toast.makeText(context, "DISABLED ALARM", Toast.LENGTH_SHORT).show()
                // off alarm
                val intent = Intent(context, OffRadioReceiver::class.java)
-               val sender = PendingIntent.getBroadcast(context, 11, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+              val pendingIntent: PendingIntent
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                  pendingIntent = PendingIntent.getBroadcast(context, 11, intent, PendingIntent.FLAG_MUTABLE)
+              } else {
+                  pendingIntent = PendingIntent.getBroadcast(context, 11, intent, PendingIntent.FLAG_CANCEL_CURRENT)
+              }
                val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-               alarmManager.cancel(sender)
+               alarmManager.cancel(pendingIntent)
            }
        }
     }
@@ -77,9 +83,15 @@ class SetAlarm (val view: View, val context: Context) {
         if( milliseconds < System.currentTimeMillis() ) milliseconds += 86400000
 
         val intent = Intent(context, OffRadioReceiver::class.java); intent.putExtra("set_alarm", "set_alarm")
-        val pendingIntent = PendingIntent.getBroadcast(context, 2, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent: PendingIntent
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            pendingIntent = PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), PendingIntent.FLAG_MUTABLE)
+        } else {
+            pendingIntent = PendingIntent.getBroadcast(context, 2, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        if ( Build.VERSION.SDK_INT  >= Build.VERSION_CODES.M ) { alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, milliseconds, pendingIntent)
+        if ( Build.VERSION.SDK_INT  >= Build.VERSION_CODES.M ) {
+            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, milliseconds, pendingIntent)
         } else { alarmManager.setExact(AlarmManager.RTC_WAKEUP, milliseconds, pendingIntent) }
 
         // guardamos string alarm data

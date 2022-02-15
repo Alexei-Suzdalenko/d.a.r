@@ -21,6 +21,7 @@ import android.media.AudioPlaybackCaptureConfiguration
 import android.net.Uri
 import android.os.PowerManager
 import android.util.Log
+import com.google.android.exoplayer2.ExoPlayer
 
 class App: Application() {
     companion object{
@@ -32,15 +33,22 @@ class App: Application() {
         var stopImageView: ImageView? = null
         lateinit var notification: Notification
         lateinit var notificationAlarm: Notification
-        var player: SimpleExoPlayer? = null
+        var player: ExoPlayer? = null
 
+        @SuppressLint("UnspecifiedImmutableFlag")
         fun playExoplayer(context: Context){
-            if( player == null) player = SimpleExoPlayer.Builder( context ).build()
+            val pendingIntent: PendingIntent
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                pendingIntent = PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), PendingIntent.FLAG_MUTABLE)
+            } else {
+                pendingIntent = PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), 0)
+            }
+            if( player == null) player = ExoPlayer.Builder( context ).build()
             val radioName = sharedPreferences.getString("stationName", "Другая Астрахань").toString()
             notification = NotificationCompat.Builder(context, "drugaya-astrajan-radio" )
                 .setContentTitle( radioName )
                 .setSmallIcon( R.drawable.play_icon )
-                .setContentIntent( PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), 0) )
+                .setContentIntent( pendingIntent )
                 .build()
             val playUrl = sharedPreferences.getString("playUrl", "http://89.179.72.53:8070/live").toString()
             player!!.setMediaItem(MediaItem.fromUri( playUrl ))
@@ -63,10 +71,16 @@ class App: Application() {
       fun setNotificationAlarm(context: Context){
           val alarmInfo = sharedPreferences.getString("current_alarm", "").toString()
           val radioName = sharedPreferences.getString("stationName", "").toString()
+          val pendingIntent: PendingIntent
+          if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+              pendingIntent = PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), PendingIntent.FLAG_MUTABLE)
+          } else {
+              pendingIntent = PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), 0)
+          }
           notificationAlarm = NotificationCompat.Builder(context, "notificationAlarm" )
               .setContentTitle("$radioName $alarmInfo")
               .setSmallIcon( R.drawable.alert_icon )
-              .setContentIntent( PendingIntent.getActivity(context, 11, Intent(context, MainActivity::class.java), 0) )
+              .setContentIntent( pendingIntent )
               .build()
       }
     }
